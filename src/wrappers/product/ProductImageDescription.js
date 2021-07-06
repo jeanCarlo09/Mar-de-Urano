@@ -51,22 +51,24 @@ const ProductImageDescription = ({
   const finalDiscountedPrice = 0;
 
   const [description, setDescription] = useState(true);
-  const [productInfo, setProductInfo] = useState(product.descriptionHtml);
+  // const [productInfo, setProductInfo] = useState(product.descriptionHtml);
 
   const checkDescription = () => {
     if (!description) {
-      setProductInfo(product.descriptionHtml);
+      // setProductInfo(product.descriptionHtml);
       setDescription(true);
     }
   }
 
   const uncheckDescription = () => {
     if (description) {
-      setProductInfo('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book');
+      // setProductInfo('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book');
       setDescription(false);
     }
 
   }
+
+  console.log(product);
 
   return (
     <div
@@ -108,9 +110,27 @@ const ProductImageDescription = ({
             </ul>
 
             <div className="product-info-text mt-20">
-              <p>
+              {/* <p>
                 {productInfo}
-              </p>
+              </p> */}
+
+              {
+                description
+                  ?
+                  product.descriptionHtml
+                  :
+                  // <table>
+
+                  //   <tr>
+                  //     <th>Weight</th>
+                  //     <td><br /> 20,5 g</td>
+                  //   </tr>
+
+                  // </table>
+
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+              }
+
             </div>
 
             <section className="related products pt-90 columns-4">

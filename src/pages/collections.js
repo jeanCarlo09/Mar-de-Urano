@@ -19,7 +19,7 @@ import CollectionsApp from "../components/CollectionsApp";
 const Collections = ({ data: { allShopifyCollection: { nodes: collections } }, location }) => {
   //   const collections = get(data, "allShopifyCollection.nodes");
 
-  console.log('location', location);
+  const handle = location.search.substring(1, location.search.length);
 
   let store;
 
@@ -36,7 +36,14 @@ const Collections = ({ data: { allShopifyCollection: { nodes: collections } }, l
     );
   }
 
+  console.log(collections);
+
+
+  // (handle !=)
+
+
   store.dispatch(fetchCollections(collections));
+
 
   return (
     <Provider store={store}>
@@ -48,7 +55,7 @@ const Collections = ({ data: { allShopifyCollection: { nodes: collections } }, l
 
                 {collections.map(collection => (
 
-                  <div className="card" style={{ backgroundImage: `url(${collection.image.localFile.childImageSharp.fixed.src})` }}>
+                  <div key={collection.id} className="card" style={{ backgroundImage: `url(${collection.image.localFile.childImageSharp.fixed.src})` }}>
                     <div className="card-content">
                       <Link key={collection.id} to={`/collections?${collection.handle}`}>
                         <h4 className="card-content-title">{collection.title}</h4>

@@ -17,7 +17,7 @@ import { fetchBlogs, postSingleInfo } from "../redux/actions/blogActions";
 const Blog = ({ data: { allContentfulBlogPost: { nodes: posts } }, location }) => {
   let store;
 
-  const handle = location.search.substring(1, location.search.length);;
+  const handle = location.search.substring(1, location.search.length);
 
   if (typeof window !== `undefined`) {
     store = createStore(

@@ -21,9 +21,11 @@ const Shop = ({ data }) => {
   const product = get(data, "shopifyProduct");
   let relatedProducts = get(data, "allShopifyProduct.nodes");
 
-  relatedProducts = relatedProducts.filter((item) => (item.shopifyId != product.shopifyId) ? item.tags.some(tag => product.tags.includes(tag)) : false)
+  relatedProducts = relatedProducts.filter((item) => (item.shopifyId != product.shopifyId) ? item.productType === product.productType : false)
     .slice(0, 4);
 
+  console.log('relatedProducts', relatedProducts, product);
+  //item.tags.some(tag => product.tags.includes(tag))
   let store;
 
   if (typeof window !== `undefined`) {
@@ -57,6 +59,7 @@ export const query = graphql`
       availableForSale
       descriptionHtml
       handle
+      productType
       publishedAt
       tags
       priceRange {
@@ -100,6 +103,7 @@ export const query = graphql`
         handle
         publishedAt
         tags
+        productType
         priceRange {
           minVariantPrice {
             currencyCode
