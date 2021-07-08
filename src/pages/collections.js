@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, graphql } from "gatsby";
+import { graphql } from "gatsby";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -10,16 +10,17 @@ import get from "lodash/get";
 
 import rootReducer from "../redux/reducers/rootReducer";
 
-import { fetchCollections } from "../redux/actions/collectionActions";
+import { fetchCollectionDetails, fetchCollections } from "../redux/actions/collectionActions";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopLayout from "../components/layouts/ShopLayout";
 import CollectionsApp from "../components/CollectionsApp";
 
-const Collections = ({ data: { allShopifyCollection: { nodes: collections } }, location }) => {
+const Collections = ({ data, location }) => {
   //   const collections = get(data, "allShopifyCollection.nodes");
 
   const handle = location.search.substring(1, location.search.length);
+  const collections = data.allShopifyCollection.nodes;
 
   let store;
 
@@ -36,38 +37,18 @@ const Collections = ({ data: { allShopifyCollection: { nodes: collections } }, l
     );
   }
 
-  console.log(collections);
+  console.log([...collections, ...collections]);
 
 
   // (handle !=)
+  // collections = [...collections, ...collections, ...collections, ...collections, ...collections, ...collections];
 
-
-  store.dispatch(fetchCollections(collections));
-
+  (handle != '' && handle != undefined) ? store.dispatch(fetchCollectionDetails(handle)) : store.dispatch(fetchCollections(collections));
 
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopLayout headerTop="visible">
-          <div className="shop-area pt-60 pb-100">
-            <div className="container-fluid">
-              <div className="grid-mosaic">
-
-                {collections.map(collection => (
-
-                  <div key={collection.id} className="card" style={{ backgroundImage: `url(${collection.image.localFile.childImageSharp.fixed.src})` }}>
-                    <div className="card-content">
-                      <Link key={collection.id} to={`/collections?${collection.handle}`}>
-                        <h4 className="card-content-title">{collection.title}</h4>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          {/* <CollectionsApp></CollectionsApp> */}
-        </ShopLayout>
+        <CollectionsApp></CollectionsApp>
       </MarDeUranoApp>
     </Provider>
   );
@@ -80,6 +61,8 @@ export const query = graphql`
         id
         title
         handle
+        description
+        descriptionHtml
         image {
           localFile {
             childImageSharp {

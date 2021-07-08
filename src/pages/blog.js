@@ -14,8 +14,11 @@ import { BlogPostList } from "../components/blog/BlogPostList";
 import { BlogSideBar } from "../components/blog/BlogSideBar";
 import { fetchBlogs, postSingleInfo } from "../redux/actions/blogActions";
 
-const Blog = ({ data: { allContentfulBlogPost: { nodes: posts } }, location }) => {
+const Blog = ({ data, location }) => {
   let store;
+
+  const posts = data.allContentfulBlogPost.nodes;
+  const categories = data.allContentfulBlogCategories.nodes;
 
   const handle = location.search.substring(1, location.search.length);
 
@@ -34,10 +37,6 @@ const Blog = ({ data: { allContentfulBlogPost: { nodes: posts } }, location }) =
 
   (handle != '' && handle != undefined) ? store.dispatch(postSingleInfo(handle)) : store.dispatch(fetchBlogs(posts));
 
-  let state = store.getState().blogData;
-
-  console.log('handle', state);
-
   return (
     <Provider store={store}>
       <MarDeUranoApp>
@@ -45,7 +44,7 @@ const Blog = ({ data: { allContentfulBlogPost: { nodes: posts } }, location }) =
           <div className="shop-area pt-80 pb-100">
             <div className="container-fluid">
               <div className="row">
-                <BlogSideBar />
+                <BlogSideBar categories={categories} />
                 <BlogPostList />
               </div>
             </div>
@@ -77,6 +76,14 @@ query BlogPosts {
       }
     }
   }
+
+  allContentfulBlogCategories(sort: { fields: [title] }) {
+    nodes {
+      id
+      title
+    }
+  }
+
 }`;
 
 

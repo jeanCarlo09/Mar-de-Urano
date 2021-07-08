@@ -126,7 +126,12 @@ const OurWorld = ({ data, location }) => {
                 </div>
 
                 <div className="col-lg-6 col-sm-12 ideology-img">
-                  <div className="ideology-img-content"></div>
+                  {/* <img src={require('../assets/images/our-world2.jpg')} src="art" /> */}
+                  <img
+                    className="img-fluid"
+                    src={require("../assets/images/our-world2.jpg")}
+                    alt=""
+                  />
                 </div>
 
               </div>
