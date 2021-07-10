@@ -2,7 +2,7 @@ import { types } from '../../types/types';
 
 const initialState = {
     posts: [],
-    postActive: [],
+    postActive: {},
     single: false
 };
 
@@ -21,7 +21,7 @@ const blogReducer = (state = [], action) => {
         case types.postSingleInfo:
             return {
                 ...state,
-                postActive: state.posts.filter((post) => (post.handle === action.payload)),
+                postActive: state.posts.filter((post) => (post.handle === action.payload))[0],
                 single: true
             }
 

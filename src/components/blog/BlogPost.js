@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
+import parse from "html-react-parser";
 
 export const BlogPost = ({ post }) => {
-    console.log(post);
 
     return (
         <div className="blog-post mb-40">
@@ -34,7 +34,7 @@ export const BlogPost = ({ post }) => {
                 </div>
 
                 <span className="blog-post-content-description">
-                    <p>{post.description.description}</p>
+                    <p>{parse(post.description.childMarkdownRemark.html)}</p>
                 </span>
 
             </div>

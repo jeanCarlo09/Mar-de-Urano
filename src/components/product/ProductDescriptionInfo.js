@@ -10,6 +10,7 @@ import { getProductCartQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
+import { SocialMedia } from "../social-media/social-media";
 
 const ProductDescriptionInfo = ({
   product,
@@ -397,25 +398,7 @@ const ProductDescriptionInfo = ({
         ""
       )}
 
-      <div className="pro-details-social">
-        <ul>
-          <li>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://flone.hasthemes.com/food/product/pumpkin-cake-with-browned/" target="_blank">
-              <i className="fab fa-facebook"></i>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/share?https://flone.hasthemes.com/food/product/pumpkin-cake-with-browned/&amp;text=Pumpkin%20Cake%20with%20Browned" target="_blank">
-              <i className="fab fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a href="http://pinterest.com/pin/create/bookmarklet/?media=https://flone.hasthemes.com/food/wp-content/uploads/2019/12/cake-product-2.jpg&amp;url=https://flone.hasthemes.com/food/product/pumpkin-cake-with-browned/&amp;is_video=false&amp;description=Pumpkin%20Cake%20with%20Browned" target="_blank">
-              <i className="fab fa-pinterest-p"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <SocialMedia></SocialMedia>
 
     </div>
   );

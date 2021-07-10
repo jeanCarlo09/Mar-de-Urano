@@ -7,6 +7,8 @@ import get from "lodash/get";
 import ProductDescriptionInfo from "../../components/product/ProductDescriptionInfo";
 import ProductImageGallerySideThumb from "../../components/product/ProductImageGallerySideThumb";
 import ProductgridList from "../../components/product/ProductgridList";
+import { RelatedProducts } from "./RelatedProducts";
+import { relatedProductsShop } from "../../helpers/relatedProducts";
 
 const ProductImageDescription = ({
   spaceTopClass,
@@ -19,7 +21,9 @@ const ProductImageDescription = ({
 }) => {
 
   const product = productActive.product[0];
-  const relatedProducts = productActive.relatedProducts;
+  let relatedProducts = productActive.relatedProducts;
+
+  relatedProducts = relatedProductsShop(relatedProducts, product);
 
   const wishlistItem = wishlistItems.filter(
     wishlistItem => wishlistItem.id === product.shopifyId
@@ -51,18 +55,15 @@ const ProductImageDescription = ({
   const finalDiscountedPrice = 0;
 
   const [description, setDescription] = useState(true);
-  // const [productInfo, setProductInfo] = useState(product.descriptionHtml);
 
   const checkDescription = () => {
     if (!description) {
-      // setProductInfo(product.descriptionHtml);
       setDescription(true);
     }
   }
 
   const uncheckDescription = () => {
     if (description) {
-      // setProductInfo('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book');
       setDescription(false);
     }
 
@@ -133,21 +134,7 @@ const ProductImageDescription = ({
 
             </div>
 
-            <section className="related products pt-90 columns-4">
-
-              <div className="section-title text-center mb-50">
-                <h2>Related products</h2>
-              </div>
-
-              <div className="row products columns-4">
-                {/* {relatedProducts.slice(0, 4).map((product) => (
-                  <div key={product.id}>{product.title}</div>
-                ))} */}
-                <ProductgridList products={relatedProducts} spaceBottomClass="mb-25" />
-
-              </div>
-
-            </section>
+            <RelatedProducts relatedProducts={relatedProducts}></RelatedProducts>
 
           </div>
 

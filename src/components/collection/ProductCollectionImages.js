@@ -7,6 +7,7 @@ export const ProductCollectionImages = ({ product }) => {
 
             <div className="product-sticky-image__single mb-10" key={index}>
                 <img
+                    style={{ width: "100%" }}
                     src={img.localFile.childImageSharp.fixed.src}
                     alt={product.title}
                     className="img-fluid"

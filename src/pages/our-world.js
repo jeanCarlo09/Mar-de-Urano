@@ -31,17 +31,17 @@ const OurWorld = ({ data, location }) => {
     <Provider store={store}>
       <MarDeUranoApp>
         <ShopLayout headerTop="visible">
-          <div className="shop-area pt-60 pb-60">
-            <div className="container our-world">
-              <div className="row about-us">
-                <div className="col-12 col-sm-5 about-us-img">
+          <div className="shop-area pt-95 pb-100">
+            <div className="container-fluid our-world">
+              <div className="row mt-35 about-us">
+                <div className="col-10 order-2 order-lg-1 col-lg-5 about-us-img">
                   <img
                     className="img-fluid"
                     src={require("../assets/images/our-world1.jpg")}
                     alt=""
                   />
                 </div>
-                <div className="col-12 col-sm-7 about-us-content">
+                <div className="col-12 col-lg-7 order-1 order-lg-2 about-us-content mb-30">
                   <h2 className="text-center mb-20 our-world-title">ABOUT US</h2>
 
                   <p>
@@ -82,7 +82,7 @@ const OurWorld = ({ data, location }) => {
                   <h2>IDEOLOGY</h2>
                 </div>
 
-                <div className="col-lg-6 col-sm-12 ideology-content">
+                <div className="col-lg-6 col-sm-12 mb-20 ideology-content">
 
 
                   <p className="ideology-content-description">
@@ -94,31 +94,31 @@ const OurWorld = ({ data, location }) => {
                   </p>
                   <div className="tags row">
 
-                    <div className="col-lg-4 col-sm-6 tags-item">
+                    <div className="col-md-4 col-sm-5 tags-item">
                       <div className="tags-item-content">Wearable</div>
                     </div>
-                    <div className="col-lg-5 col-sm-6 tags-item">
+                    <div className="col-md-5 col-sm-7 tags-item">
                       <div className="tags-item-content">Art</div>
                     </div>
-                    <div className="col-lg-3 col-sm-6 tags-item">
+                    <div className="col-md-3 col-sm-7 tags-item">
                       <span className="tags-item-content">Ethical</span>
                     </div>
-                    <div className="col-lg-5 col-sm-6 tags-item">
+                    <div className="col-md-5 col-sm-5 tags-item">
                       <span className="tags-item-content">Sustainable</span>
                     </div>
-                    <div className="col-lg-3 col-sm-6 tags-item">
+                    <div className="col-md-3 col-sm-5 tags-item">
                       <span className="tags-item-content">Affordable</span>
                     </div>
-                    <div className="col-lg-4 col-sm-6 tags-item">
+                    <div className="col-md-4 col-sm-7 tags-item">
                       <span className="tags-item-content">Timeless</span>
                     </div>
-                    <div className="col-lg-3 col-sm-6 tags-item">
+                    <div className="col-md-3 col-sm-7 tags-item">
                       <span className="tags-item-content">High Quality</span>
                     </div>
-                    <div className="col-lg-4 col-sm-6 tags-item">
+                    <div className="col-md-4 col-sm-5 tags-item">
                       <span className="tags-item-content">Unique</span>
                     </div>
-                    <div className="col-lg-5 col-sm-6 tags-item">
+                    <div className="col-md-5 tags-item">
                       <span className="tags-item-content">Slow Fashion</span>
                     </div>
                   </div>
@@ -126,7 +126,7 @@ const OurWorld = ({ data, location }) => {
                 </div>
 
                 <div className="col-lg-6 col-sm-12 ideology-img">
-                  {/* <img src={require('../assets/images/our-world2.jpg')} src="art" /> */}
+
                   <img
                     className="img-fluid"
                     src={require("../assets/images/our-world2.jpg")}

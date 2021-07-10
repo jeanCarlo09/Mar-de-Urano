@@ -1,4 +1,5 @@
 import React from "react";
+
 import { graphql } from "gatsby";
 
 import { Provider } from "react-redux";
@@ -6,18 +7,13 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-import get from "lodash/get";
-
-import rootReducer from "../redux/reducers/rootReducer";
 
 import { fetchCollectionDetails, fetchCollections } from "../redux/actions/collectionActions";
-
+import rootReducer from "../redux/reducers/rootReducer";
 import MarDeUranoApp from "../components/MarDeUranoApp";
-import ShopLayout from "../components/layouts/ShopLayout";
 import CollectionsApp from "../components/CollectionsApp";
 
 const Collections = ({ data, location }) => {
-  //   const collections = get(data, "allShopifyCollection.nodes");
 
   const handle = location.search.substring(1, location.search.length);
   const collections = data.allShopifyCollection.nodes;
@@ -37,13 +33,11 @@ const Collections = ({ data, location }) => {
     );
   }
 
-  console.log([...collections, ...collections]);
-
-
-  // (handle !=)
-  // collections = [...collections, ...collections, ...collections, ...collections, ...collections, ...collections];
-
-  (handle != '' && handle != undefined) ? store.dispatch(fetchCollectionDetails(handle)) : store.dispatch(fetchCollections(collections));
+  (handle != '' && handle != undefined)
+    ?
+    store.dispatch(fetchCollectionDetails(handle))
+    :
+    store.dispatch(fetchCollections(collections));
 
   return (
     <Provider store={store}>

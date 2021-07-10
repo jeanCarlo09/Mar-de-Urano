@@ -1,13 +1,17 @@
 /*------- 11. About style ------ */
 
 .our-world {
+  padding: 0;
   .about-us {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     &-content {
-      padding: 0px 0px 0px 30px;
       display: flex;
       flex-direction: column;
       align-content: center;
       justify-content: center;
+      padding: 0 30px;
 
       p {
         text-align: justify;
@@ -17,10 +21,11 @@
     }
 
     &-img {
-      position: relative;
       background-color: #fff;
-      padding: 10px;
       max-height: 750px;
+      position: relative;
+      padding: 0;
+
       &::before {
         content: "";
         position: absolute;
@@ -34,8 +39,10 @@
       }
 
       img {
+        padding: 6px;
         height: 100%;
         width: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -78,7 +85,7 @@
         content: "";
         margin: 0 auto;
         position: absolute;
-        top: 40%;
+        top: 42%;
         left: 0;
         right: 0;
         bottom: 0;
@@ -130,6 +137,7 @@
       }
 
       .tags {
+        padding: 0px 10px;
         &-item {
           padding: 10px;
           &-content {
@@ -157,13 +165,9 @@
 
     &-img {
       overflow: hidden;
-      &-content {
-        // background-image: url();
-        // background-attachment: fixed;
-        // // background-repeat: no-repeat;
-        // background-size: contain;
-        height: 100%;
+      img {
         width: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -176,7 +180,7 @@
     width: 10%;
     height: 3px;
     position: absolute;
-    left: 52%;
+    left: 49%;
     background: linear-gradient(315deg, #f1c308, #f1d151);
   }
 }

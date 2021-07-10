@@ -4,15 +4,13 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { graphql, Link } from "gatsby";
+import { graphql } from "gatsby";
 
+import BlogApp from "../components/BlogApp";
 import rootReducer from "../redux/reducers/rootReducer";
-
 import MarDeUranoApp from "../components/MarDeUranoApp";
-import ShopLayout from "../components/layouts/ShopLayout";
-import { BlogPostList } from "../components/blog/BlogPostList";
-import { BlogSideBar } from "../components/blog/BlogSideBar";
 import { fetchBlogs, postSingleInfo } from "../redux/actions/blogActions";
+
 
 const Blog = ({ data, location }) => {
   let store;
@@ -40,16 +38,7 @@ const Blog = ({ data, location }) => {
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopLayout headerTop="visible">
-          <div className="shop-area pt-80 pb-100">
-            <div className="container-fluid">
-              <div className="row">
-                <BlogSideBar categories={categories} />
-                <BlogPostList />
-              </div>
-            </div>
-          </div>
-        </ShopLayout>
+        <BlogApp categories={categories}></BlogApp>
       </MarDeUranoApp>
     </Provider>
   );
@@ -57,12 +46,15 @@ const Blog = ({ data, location }) => {
 
 export const query = graphql`
 query BlogPosts {
-  allContentfulBlogPost {
+  allContentfulBlogPost(sort: { fields: [date] }) {
     nodes {
       id
       title
       description {
         description
+        childMarkdownRemark {
+          html
+        }
       }
       date
       handle
@@ -70,7 +62,7 @@ query BlogPosts {
        name
       }
       image {
-        fixed {
+        fixed(width: 840, quality: 100) {
           src
         }
       }
@@ -81,14 +73,12 @@ query BlogPosts {
     nodes {
       id
       title
+      blog_post {
+        id
+      }
     }
   }
-
 }`;
-
-
-
-
 
 
 export default Blog;

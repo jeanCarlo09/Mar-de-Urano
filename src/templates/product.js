@@ -21,10 +21,6 @@ const Shop = ({ data }) => {
   const product = get(data, "shopifyProduct");
   let relatedProducts = get(data, "allShopifyProduct.nodes");
 
-  relatedProducts = relatedProducts.filter((item) => (item.shopifyId != product.shopifyId) ? item.productType === product.productType : false)
-    .slice(0, 4);
-
-  console.log('relatedProducts', relatedProducts, product);
   //item.tags.some(tag => product.tags.includes(tag))
   let store;
 

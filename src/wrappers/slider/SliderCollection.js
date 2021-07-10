@@ -32,7 +32,7 @@ const SliderCollection = ({ sliderCollection }) => {
         )
     };
     return (
-        <div className="slider-area col-12">
+        <div className="slider-area mt-80">
             <div className="slider-active nav-style-1">
                 <Swiper {...params}>
                     {sliderCollection &&
