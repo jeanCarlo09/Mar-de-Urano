@@ -1,7 +1,6 @@
 import React from 'react';
 import { CheckCategorie } from './CheckCategorie';
-export const BlogSideBarCategories = ({ categories }) => {
-
+export const BlogSideBarCategories = ({ categories, categoriesActives }) => {
 
     return (
         <section className="sidebar-widget mt-35 mb-30">
@@ -11,7 +10,10 @@ export const BlogSideBarCategories = ({ categories }) => {
                     {categories.map((category) => (
                         <li key={category.id}>
                             <div className="sidebar-widget-list-left blog-categories-item">
-                                <CheckCategorie category={category}></CheckCategorie>
+                                <CheckCategorie category={category}
+                                    isChecked={categoriesActives.includes(category.handle)}>
+
+                                </CheckCategorie>
                                 <span className="checkmark" />
                             </div>
                         </li>

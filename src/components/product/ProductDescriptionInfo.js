@@ -500,10 +500,10 @@ const ProductDescriptionInfo = ({
                   selectedProductPrint,
                   images,
                 );
-                console.log('selectedProductPrint', selectedProductPrint);
 
               }}
-              disabled={!product.availableForSale}
+              disabled={!product.availableForSale
+                || (product.productType === 'Custom' && (selectedProductColor === null || selectedProductPrint === null))}
             >
               {" "}
               Add To Cart{" "}

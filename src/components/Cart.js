@@ -76,6 +76,18 @@ const Cart = props => {
                               "priceRange.maxVariantPrice.currencyCode"
                             );
 
+                            let imageCustomProduct = null;
+
+                            if (cartItem.productType === 'Custom') {
+                              let customProduct = cartItem.variants.filter((item) =>
+                              (item.print === cartItem.selectedProductPrint &&
+                                item.color === cartItem.selectedProductColor &&
+                                item.size === cartItem.selectedProductSize))[0];
+
+                              imageCustomProduct = customProduct.image.localFile.childImageSharp.fixed;
+
+                            }
+
                             const discountedPrice = null;
 
                             const price = get(
@@ -100,7 +112,7 @@ const Cart = props => {
                                   <Link to={`/${cartItem.handle}`}>
                                     <img
                                       className="img-fluid"
-                                      src={imagesProduct[0].src}
+                                      src={cartItem.productType === 'Custom' ? imageCustomProduct.src : imagesProduct[0].src}
                                       alt=""
                                     />
                                   </Link>
@@ -138,6 +150,18 @@ const Cart = props => {
                                   ) : (
                                     ""
                                   )}
+
+                                  {cartItem.selectedProductPrint ? (
+                                    <div className="cart-item-variation">
+                                      <span>
+                                        Print:{" "}
+                                        {cartItem.selectedProductPrint}
+                                      </span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )}
+
                                 </td>
 
                                 <td className="product-price-cart">

@@ -17,7 +17,7 @@ const blogReducer = (state = [], action) => {
                 posts: action.payload,
                 single: false,
                 postActive: {},
-                categoriesActives: []
+                // categoriesActives: []
             }
 
         case types.postSingleInfo:
@@ -25,7 +25,7 @@ const blogReducer = (state = [], action) => {
                 ...state,
                 postActive: state.posts.filter((post) => (post.handle === action.payload))[0],
                 single: true,
-                categoriesActives: []
+                // categoriesActives: []
             }
 
         case types.addActiveCategory:

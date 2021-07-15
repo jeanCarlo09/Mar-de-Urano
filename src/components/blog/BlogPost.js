@@ -34,7 +34,7 @@ export const BlogPost = ({ post }) => {
                 </div>
 
                 <span className="blog-post-content-description">
-                    <p>{parse(post.description.childMarkdownRemark.html)}</p>
+                    {parse(post.description.childMarkdownRemark.html)}
                 </span>
 
             </div>

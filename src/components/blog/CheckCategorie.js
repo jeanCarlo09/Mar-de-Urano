@@ -1,18 +1,24 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addActiveCategory, removeActiveCategory } from '../../redux/actions/blogActions';
+import { navigate } from 'gatsby';
 
-
-export const CheckCategorie = ({ category }) => {
+export const CheckCategorie = ({ category, isChecked }) => {
 
     const dispatch = useDispatch();
-    const [checkedState, setCheckedState] = useState(false);
+    const [checkedState, setCheckedState] = useState(isChecked);
+
 
     const click = () => {
 
         (checkedState) ? dispatch(removeActiveCategory(category.handle)) : dispatch(addActiveCategory(category.handle));
 
         setCheckedState(!checkedState);
+
+        if (window.location.search != '') {
+            console.log('ROUTING');
+            navigate('/blog');
+        }
     }
 
     return (
