@@ -3,7 +3,8 @@ import { types } from '../../types/types';
 const initialState = {
     posts: [],
     postActive: {},
-    single: false
+    single: false,
+    categoriesActives: []
 };
 
 const blogReducer = (state = [], action) => {
@@ -15,14 +16,28 @@ const blogReducer = (state = [], action) => {
                 ...state,
                 posts: action.payload,
                 single: false,
-                postActive: {}
+                postActive: {},
+                categoriesActives: []
             }
 
         case types.postSingleInfo:
             return {
                 ...state,
                 postActive: state.posts.filter((post) => (post.handle === action.payload))[0],
-                single: true
+                single: true,
+                categoriesActives: []
+            }
+
+        case types.addActiveCategory:
+            return {
+                ...state,
+                categoriesActives: [...state.categoriesActives, action.payload]
+            }
+
+        case types.removeActiveCategory:
+            return {
+                ...state,
+                categoriesActives: state.categoriesActives.filter((item) => item != action.payload)
             }
 
         default:

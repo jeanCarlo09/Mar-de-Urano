@@ -16,10 +16,11 @@ import { accentFold } from "../helpers/utils";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopApp from "../components/ShopApp";
+import { getProductsOutCustom } from "../helpers/product";
 
 const Shop = ({ data, location }) => {
 
-  let products = get(data, "allShopifyProduct.nodes");
+  let products = getProductsOutCustom(get(data, "allShopifyProduct.nodes"));
 
   let store;
 
@@ -78,6 +79,7 @@ export const query = graphql`
         description
         handle
         publishedAt
+        productType 
         tags
         priceRange {
           minVariantPrice {

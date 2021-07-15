@@ -6,19 +6,27 @@ import Paginator from "react-hooks-paginator";
 
 import { BlogPost } from './BlogPost';
 import { BlogPostCard } from './BlogPostCard';
+import { postsWithCategoriesActives } from '../../helpers/blog';
 
 
-const BlogPostList = ({ posts, single, postActive }) => {
+const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
+
 
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
+    const [data, setData] = useState([...posts]);
+
+    useEffect(() => {
+        setData(postsWithCategoriesActives(posts, categoriesActives));
+    }, [categoriesActives]);
+
 
     const pageLimit = 5;
 
     useEffect(() => {
-        setCurrentData(posts.slice(offset, offset + pageLimit));
-    }, [offset]);
+        setCurrentData(data.slice(offset, offset + pageLimit));
+    }, [offset, data]);
 
 
     return (
@@ -40,7 +48,7 @@ const BlogPostList = ({ posts, single, postActive }) => {
 
                                 <div className="pro-pagination-style text-center mt-30">
                                     <Paginator
-                                        totalRecords={posts.length}
+                                        totalRecords={data.length}
                                         pageLimit={pageLimit}
                                         pageNeighbours={2}
                                         setOffset={setOffset}
@@ -69,7 +77,8 @@ const mapStateToProps = (state) => {
     return {
         posts: state.blogData.posts,
         single: state.blogData.single,
-        postActive: state.blogData.postActive
+        postActive: state.blogData.postActive,
+        categoriesActives: state.blogData.categoriesActives
     }
 }
 

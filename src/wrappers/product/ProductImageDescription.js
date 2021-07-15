@@ -10,6 +10,8 @@ import ProductgridList from "../../components/product/ProductgridList";
 import { RelatedProducts } from "./RelatedProducts";
 import { relatedProductsShop } from "../../helpers/relatedProducts";
 
+import parse from 'html-react-parser';
+
 const ProductImageDescription = ({
   spaceTopClass,
   spaceBottomClass,
@@ -18,6 +20,7 @@ const ProductImageDescription = ({
   cartItems,
   wishlistItems,
   compareItems,
+  print,
 }) => {
 
   const product = productActive.product[0];
@@ -56,6 +59,10 @@ const ProductImageDescription = ({
 
   const [description, setDescription] = useState(true);
 
+  const [imageCustomActive, setImageCustomActive] = useState((product.productType === 'Custom' ? imagesArray[0] : null));
+
+  console.log(imageCustomActive, 'image', images);
+
   const checkDescription = () => {
     if (!description) {
       setDescription(true);
@@ -69,8 +76,6 @@ const ProductImageDescription = ({
 
   }
 
-  console.log(product);
-
   return (
     <div
       className={`shop-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""
@@ -83,6 +88,7 @@ const ProductImageDescription = ({
               product={product}
               thumbPosition="left"
               images={imagesArray}
+              imageCustomActive={imageCustomActive}
             />
           </div>
           <div className="col-lg-6 col-md-6">
@@ -97,6 +103,8 @@ const ProductImageDescription = ({
               compareItem={compareItem}
               addToast={addToast}
               images={imagesArray}
+              print={print}
+              setImageCustomActive={setImageCustomActive}
             />
           </div>
 
@@ -118,7 +126,7 @@ const ProductImageDescription = ({
               {
                 description
                   ?
-                  product.descriptionHtml
+                  parse(product.descriptionHtml)
                   :
                   // <table>
 

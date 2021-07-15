@@ -12,8 +12,10 @@ export const addToCart = (
   selectedProductColor,
   selectedProductSize,
   selectedProductMaterial,
-  images
+  selectedProductPrint,
+  images,
 ) => {
+
   return dispatch => {
     if (addToast) {
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
@@ -38,10 +40,16 @@ export const addToCart = (
           : item.selectedProductMaterial
             ? item.selectedProductMaterial
             : null,
+        selectedProductPrint: selectedProductPrint
+          ? selectedProductPrint
+          : item.selectedProductPrint
+            ? item.selectedProductPrint
+            : null,
         images: images,
       },
     });
   };
+
 };
 //decrease from cart
 export const decreaseQuantity = (item, addToast) => {

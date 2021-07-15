@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ShopLayout from '../components/layouts/ShopLayout';
 import { Link } from 'gatsby';
+import { RelatedProducts } from '../wrappers/product/RelatedProducts';
+import ShopProducts from '../wrappers/product/ShopProducts';
+import { connect } from 'react-redux';
 
-export const CustomApp = () => {
+const CustomApp = ({ relatedProducts, products }) => {
+
+    const [layout, setLayout] = useState("grid four-column");
 
     return (
         <ShopLayout headerTop="visible">
-            <div className="owl-stage-outer">
+            <div className="owl-stage-outer pt-125">
                 <div className="owl-stage" >
                     <div className="owl-item cloned">
                         <div className="custom-img single-slider-2 d-flex align-items-center bg-img flone_slider_3" style={{ backgroundImage: 'url(https://flone.hasthemes.com/wp-content/uploads/2020/04/slider-2.jpg)' }}>
@@ -26,9 +31,28 @@ export const CustomApp = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div></div>
-                </div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="shop-area pt-20 pb-100">
+                <div className="container-fluid">
+
+                    <ShopProducts layout={layout} products={products} />
+
+                    <RelatedProducts relatedProducts={relatedProducts}></RelatedProducts>
+
+                </div>
+            </div>
         </ShopLayout>
     );
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+        products: state.productData.products,
+    };
+};
+
+export default connect(mapStateToProps)(CustomApp)

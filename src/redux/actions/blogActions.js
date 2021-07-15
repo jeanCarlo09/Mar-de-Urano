@@ -18,3 +18,21 @@ export const postSingleInfo = (id) => {
         });
     }
 }
+
+export const addActiveCategory = (category) => {
+    return dispatch => {
+        dispatch({
+            type: types.addActiveCategory,
+            payload: category
+        });
+    }
+}
+
+export const removeActiveCategory = (category) => {
+    return dispatch => {
+        dispatch({
+            type: types.removeActiveCategory,
+            payload: category
+        });
+    }
+}

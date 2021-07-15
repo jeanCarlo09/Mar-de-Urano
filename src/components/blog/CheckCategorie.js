@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { addActiveCategory, removeActiveCategory } from '../../redux/actions/blogActions';
 
 
 export const CheckCategorie = ({ category }) => {
 
+    const dispatch = useDispatch();
     const [checkedState, setCheckedState] = useState(false);
 
     const click = () => {
+
+        (checkedState) ? dispatch(removeActiveCategory(category.handle)) : dispatch(addActiveCategory(category.handle));
+
         setCheckedState(!checkedState);
     }
 

@@ -7,35 +7,92 @@ import { Provider } from 'react-redux';
 import thunk from "redux-thunk";
 
 import MarDeUranoApp from '../components/MarDeUranoApp';
-import { CustomApp } from '../components/CustomApp';
+import CustomApp from '../components/CustomApp';
+import { graphql } from 'gatsby';
+import { getProductsWithCustom } from '../helpers/product';
+import { get } from 'lodash';
+import { fetchProducts } from '../redux/actions/productActions';
 
-const Custom = ({ location }) => {
+const Custom = ({ data, location }) => {
 
-    const custom = location.search.substring(1, location.search.length);
-    console.log('custom', custom);
-    let store;
+  const custom = location.search.substring(1, location.search.length);
+  const nodes = get(data, "allShopifyProduct.nodes");
+  let products = getProductsWithCustom(nodes);
 
-    if (typeof window !== `undefined`) {
-        store = createStore(
-            rootReducer,
-            load(),
-            composeWithDevTools(applyMiddleware(thunk, save()))
-        );
-    } else {
-        store = createStore(
-            rootReducer,
-            composeWithDevTools(applyMiddleware(thunk))
-        );
-    }
+  // const prints = get(data, 'allContentfulPrintCustom.nodes');
 
-    return (
-        <Provider store={store}>
-            <MarDeUranoApp>
-                <CustomApp></CustomApp>
-            </MarDeUranoApp>
-        </Provider>
+  let store;
+
+  if (typeof window !== `undefined`) {
+    store = createStore(
+      rootReducer,
+      load(),
+      composeWithDevTools(applyMiddleware(thunk, save()))
     );
+  } else {
+    store = createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
+  }
+
+  store.dispatch(fetchProducts(products));
+
+  return (
+    <Provider store={store}>
+      <MarDeUranoApp>
+        <CustomApp relatedProducts={nodes.slice(0, 4)}></CustomApp>
+      </MarDeUranoApp>
+    </Provider>
+  );
 }
+
+export const query = graphql`
+  query ProductsCustom {
+    allShopifyProduct(sort: { order: ASC, fields: title }) {
+      nodes {
+        id
+        shopifyId
+        title
+        availableForSale
+        description
+        handle
+        publishedAt
+        productType 
+        tags
+        priceRange {
+          minVariantPrice {
+            currencyCode
+            amount
+          }
+          maxVariantPrice {
+            currencyCode
+            amount
+          }
+        }
+        variants {
+          shopifyId
+          availableForSale
+          title
+          selectedOptions {
+            name
+            value
+          }
+        }
+        images {
+          localFile {
+            childImageSharp {
+              fixed(width: 600, height: 800) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 
 
 export default Custom;

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import parse from "html-react-parser";
+import parse from 'html-react-parser';
 
 export const BlogPost = ({ post }) => {
 

@@ -10,7 +10,7 @@ export const BlogSideBarCategories = ({ categories }) => {
                 <ul>
                     {categories.map((category) => (
                         <li key={category.id}>
-                            <div className="sidebar-widget-list-left">
+                            <div className="sidebar-widget-list-left blog-categories-item">
                                 <CheckCategorie category={category}></CheckCategorie>
                                 <span className="checkmark" />
                             </div>

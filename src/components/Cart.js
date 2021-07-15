@@ -43,6 +43,8 @@ const Cart = props => {
     handleCheckout(cartItems);
   };
 
+  console.log('IMP', cartItems);
+
   return (
     <Fragment>
       <ShopLayout headerTop="visible">
@@ -85,7 +87,7 @@ const Cart = props => {
                             );
                             const finalDiscountedPrice = 0;
 
-                            cartItem.stock = 2;
+                            cartItem.stock = 2; //THIS IS THE PROBLEM
 
                             discountedPrice != null
                               ? (cartTotalPrice +=

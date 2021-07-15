@@ -66,6 +66,10 @@ query BlogPosts {
           src
         }
       }
+      categories {
+        handle
+        id
+      }
     }
   }
 
@@ -73,6 +77,7 @@ query BlogPosts {
     nodes {
       id
       title
+      handle
       blog_post {
         id
       }

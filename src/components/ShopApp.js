@@ -46,6 +46,8 @@ const ShopApp = (props) => {
     setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
   }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
 
+  console.log(currentData);
+
   return (
     <ShopLayout headerTop="visible">
       <div className="shop-area pt-95 pb-100">

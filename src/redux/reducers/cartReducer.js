@@ -15,6 +15,7 @@ const cartReducer = (state = initState, action) => {
     product = action.payload;
 
   if (action.type === ADD_TO_CART) {
+
     if (product.variants === undefined) {
       const cartItem = cartItems.filter(
         item => item.shopifyId === product.shopifyId
@@ -47,8 +48,9 @@ const cartReducer = (state = initState, action) => {
         return (
           item.shopifyId === product.shopifyId
           && (product.selectedProductColor ? (product.selectedProductColor === item.selectedProductColor) : true)
-          && (product.selectedProductSize && product.selectedProductSize === item.selectedProductSize)
-          && (product.selectedProductMaterial && product.selectedProductMaterial === item.selectedProductMaterial)
+          && (product.selectedProductSize ? (product.selectedProductSize === item.selectedProductSize) : true)
+          && (product.selectedProductMaterial ? (product.selectedProductMaterial === item.selectedProductMaterial) : true)
+          && (product.selectedProductPrint ? (product.selectedProductPrint === item.selectedProductPrint) : true)
         );
       })[0];
       if (cartItem === undefined) {
@@ -76,12 +78,13 @@ const cartReducer = (state = initState, action) => {
         //     },
         //   ];
       } else {
+
+        if (cartItem.quantity >= 5) {
+          return state;
+        }
+
         return cartItems.map(item =>
           item.shopifyId === cartItem.shopifyId
-            // &&
-            //   cartItem.selectedProductColor === item.selectedProductColor &&
-            //   cartItem.selectedProductSize === item.selectedProductSize &&
-            //   cartItem.selectedProductMaterial === item.selectedProductMaterial
             ? {
               ...item,
               quantity: product.quantity
@@ -90,6 +93,7 @@ const cartReducer = (state = initState, action) => {
               selectedProductColor: product.selectedProductColor,
               selectedProductSize: product.selectedProductSize,
               selectedProductMaterial: product.selectedProductMaterial,
+              selectedProductPrint: product.selectedProductPrint
             }
             : item
         );

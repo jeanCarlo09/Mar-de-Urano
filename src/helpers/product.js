@@ -2,8 +2,8 @@
 export const getProducts = (products, category, type, limit) => {
   const finalProducts = category
     ? products.filter(
-        product => product.category.filter(single => single === category)[0]
-      )
+      product => product.category.filter(single => single === category)[0]
+    )
     : products;
 
   if (type && type === "new") {
@@ -234,3 +234,12 @@ export const toggleShopTopFilter = e => {
   }
   e.currentTarget.classList.toggle("active");
 };
+
+
+export const getProductsOutCustom = (products) => {
+  return products.filter((product) => product.productType != 'Custom');
+}
+
+export const getProductsWithCustom = (products) => {
+  return products.filter((product) => product.productType === 'Custom');
+}

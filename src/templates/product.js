@@ -14,14 +14,17 @@ import { fetchProducts, fetchProductSingle } from "../redux/actions/productActio
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopProduct from "../components/ShopProduct";
+import { getProductsOutCustom } from "../helpers/product";
 
 const Shop = ({ data }) => {
 
 
   const product = get(data, "shopifyProduct");
-  let relatedProducts = get(data, "allShopifyProduct.nodes");
 
-  //item.tags.some(tag => product.tags.includes(tag))
+  let relatedProducts = getProductsOutCustom(get(data, "allShopifyProduct.nodes"));
+
+  const print = product.productType === 'Custom' ? get(data, 'allContentfulPrintCustom.nodes') : [];
+
   let store;
 
   if (typeof window !== `undefined`) {
@@ -36,12 +39,13 @@ const Shop = ({ data }) => {
       composeWithDevTools(applyMiddleware(thunk))
     );
   }
+
   store.dispatch(fetchProductSingle({ product: [product], relatedProducts }));
 
   return (
     <Provider store={store}>
       <MarDeUranoApp>
-        <ShopProduct></ShopProduct>
+        <ShopProduct print={print}></ShopProduct>
       </MarDeUranoApp>
     </Provider>
   );
@@ -75,6 +79,15 @@ export const query = graphql`
         selectedOptions {
           name
           value
+        }
+        image {
+          localFile {
+            childImageSharp {
+              fixed {
+                src
+              }
+            }
+          }
         }
       }
       images {
@@ -131,7 +144,16 @@ export const query = graphql`
       }
     }
 
-
+    allContentfulPrintCustom {
+      nodes {
+        printId
+        image {
+          fixed(width: 80, height: 80) {
+            src
+          }
+        }
+      }
+    }
   }
 `;
 export default Shop;
