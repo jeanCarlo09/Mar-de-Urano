@@ -6,7 +6,7 @@ import get from "lodash/get";
 import truncate from "lodash/truncate";
 import uniq from "lodash/uniq";
 
-import { getProductCartQuantity } from "../../helpers/product";
+import { getProductQuantity } from "../../helpers/product";
 import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
@@ -89,12 +89,10 @@ const ProductDescriptionInfo = ({
 
   const [quantityCount, setQuantityCount] = useState(1);
 
-  const productCartQty = getProductCartQuantity(
-    cartItems,
-    product,
-    selectedProductColor,
-    selectedProductSize
-  );
+
+  const [productCartQty, setProductCartQty] = useState(0);
+
+  const maxQuantity = useRef((product.availableForSale) ? 5 : 0);
 
   const availableForSale = get(product, "availableForSale");
   const shortDescription = get(product, "descriptionHtml")
@@ -233,7 +231,19 @@ const ProductDescriptionInfo = ({
   };
 
   const [firstLoad, setFisrtLoad] = useState(true);
-  const notInitialRender = useRef(0);
+  const notInitialRender = useRef(true);
+
+  const updateAddCart = () => {
+    setProductCartQty(productCartQty + quantityCount);
+    setQuantityCount(1);
+  }
+
+
+  useEffect(() => {
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, selectedProductPrint));
+    setQuantityCount(1);
+  }, [cartItems])
 
   useEffect(() => {
     if (firstLoad && productVariant !== null) {
@@ -263,14 +273,15 @@ const ProductDescriptionInfo = ({
 
         (customProduct) && setImageCustomActive(customProduct.image.localFile.childImageSharp.fixed);
 
-      } else if (selectedProductPrint != null && selectedProductColor === null && notInitialRender.current >= 2) {
+      } else if (selectedProductPrint != null && selectedProductColor === null && !notInitialRender.current) {
         setSelectedProductColor(productVariant.colors[0]);
       }
-
-      notInitialRender.current = notInitialRender.current + 1;
     }
 
-  }, [selectedProductPrint, selectedProductColor, selectedProductSize]);
+    setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
+      selectedProductSize, selectedProductMaterial, selectedProductPrint));
+
+  }, [selectedProductPrint, selectedProductColor, selectedProductSize, selectedProductMaterial]);
 
 
   return (
@@ -328,7 +339,7 @@ const ProductDescriptionInfo = ({
                         setFisrtLoad(false);
                         // filterByType(1, single);
                         setQuantityCount(1);
-
+                        notInitialRender.current = false;
                         setSelectedProductColor(single);
                       }}
                     />
@@ -375,7 +386,7 @@ const ProductDescriptionInfo = ({
                           setFisrtLoad(false);
                           // filterByType(4, single.printId);
                           setQuantityCount(1);
-
+                          notInitialRender.current = false;
                           setSelectedProductPrint(single.printId);
                         }}
                       />
@@ -446,7 +457,6 @@ const ProductDescriptionInfo = ({
                         setFisrtLoad(false);
                         // filterByType(3, single);
                         setQuantityCount(1);
-
                         setSelectedProductMaterial(single);
                       }}
                     />
@@ -478,7 +488,7 @@ const ProductDescriptionInfo = ({
           <button
             onClick={() =>
               setQuantityCount(
-                quantityCount < 5 ? quantityCount + 1 : quantityCount
+                (quantityCount + productCartQty) < maxQuantity.current ? quantityCount + 1 : quantityCount
               )
             }
             className="inc qtybutton"
@@ -500,10 +510,12 @@ const ProductDescriptionInfo = ({
                   selectedProductPrint,
                   images,
                 );
+                updateAddCart();
 
               }}
-              disabled={!product.availableForSale
-                || (product.productType === 'Custom' && (selectedProductColor === null || selectedProductPrint === null))}
+              disabled={(productCartQty >= maxQuantity.current
+                || product.productType === 'Custom' && (selectedProductColor === null || selectedProductPrint === null)
+              )}
             >
               {" "}
               Add To Cart{" "}

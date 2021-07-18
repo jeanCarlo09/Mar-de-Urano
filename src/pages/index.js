@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'gatsby';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { graphql, Link } from 'gatsby';
+import get from "lodash/get";
 
 import Diamond from '../components/landing/Diamond';
 import ModalDiamond from '../components/landing/ModalDiamond';
 import Splash from '../components/landing/Splash';
 
-export default function Index() {
+export default function Index({ data }) {
+
+  const imagesDiamonds = useMemo(() => get(data, 'allContentfulImagesLanding.nodes')[0].images);
+
+  const countImages = useRef(0);
+
 
   const [show, setShow] = useState(false); //hook state to show modal with images art
   const [loading, setLoading] = useState(false); //state while image is charging in modal
@@ -15,11 +21,14 @@ export default function Index() {
   const [currentImage, setCurrentImage] = useState("");
 
   const handleOnClick = () => {  // set sate to open modal and load image to show in modal
-    const randomNumber = Math.ceil(1 + Math.random() * (63 - 1));
-    const image = require(`../assets/images/landingimages/image-${randomNumber}.png`);
-    setCurrentImage(image);
+    // const randomNumber = Math.ceil(1 + Math.random() * (63 - 1));
+    // const image = require(`../assets/images/landingimages/image-${randomNumber}.png`);
+
+    setCurrentImage(imagesDiamonds[countImages.current].image.fixed.src);
     setLoading(true);
     setShow(true);
+
+    (countImages.current + 1 === imagesDiamonds.length) ? countImages.current = 0 : countImages.current++;
   };
 
   const loadingImg = () => { // set te state to landing when image in modal is charge
@@ -143,3 +152,19 @@ export default function Index() {
   )
 }
 
+export const query = graphql`
+query ImagesLanding {
+  allContentfulImagesLanding {
+    nodes {
+      id
+      images {
+        image {
+          fixed(width: 700, height: 700) {
+           src
+          }
+        }
+      }
+    }
+  }
+}
+`;

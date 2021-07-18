@@ -64,6 +64,30 @@ export const getProductCartQuantity = (
   }
 };
 
+
+export const getProductQuantity = (cartItems, product, color, size, material, print) => {
+
+  // console.log(product, color, size, material, print);
+
+  if (cartItems.length === 0) {
+    return 0;
+  }
+
+  let productInCart = cartItems.filter(
+    single => single.shopifyId === product.shopifyId &&
+      (single.selectedProductColor ? single.selectedProductColor === color : true) &&
+      (single.selectedProductSize ? single.selectedProductSize === size : true) &&
+      (single.selectedProductMaterial ? single.selectedProductMaterial === material : true) &&
+      (single.selectedProductPrint ? single.selectedProductPrint === print : true)
+  )[0];
+
+  if (productInCart) {
+    return productInCart.quantity;
+  } else {
+    return 0;
+  }
+}
+
 //get products based on category
 export const getSortedProducts = (products, sortType, sortValue) => {
   if (products && sortType && sortValue) {

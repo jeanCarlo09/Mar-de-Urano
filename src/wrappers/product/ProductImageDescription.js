@@ -76,6 +76,8 @@ const ProductImageDescription = ({
 
   }
 
+  console.log(cartItems);
+
   return (
     <div
       className={`shop-area ${spaceTopClass ? spaceTopClass : ""} ${spaceBottomClass ? spaceBottomClass : ""

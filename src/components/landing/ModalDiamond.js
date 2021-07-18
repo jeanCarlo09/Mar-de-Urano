@@ -6,19 +6,6 @@ import Image from 'react-bootstrap/Image';
 
 const ModalDiamond = ({ handleClose, show, loadingImg, loading, currentImage }) => {
 
-    // const [currentImage, setCurrentImage] = useState('');
-
-    // useEffect(() => {
-    //     if (show) {
-
-    //         const randomNumber = Math.ceil(1 + Math.random() * (63 - 1));
-    //         const image = `../assets/images/landingimages/image-${randomNumber}.png`;
-    //         setCurrentImage(image);
-    //     } else {
-    //         setCurrentImage('');
-    //     }
-    // }, [show]);
-
     return (
         <>
             < Modal

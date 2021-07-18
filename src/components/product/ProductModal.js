@@ -340,7 +340,7 @@ function ProductModal(props) {
                                 name="product-color"
                                 checked={
                                   productVariant.colors.length === 1 ||
-                                  single === selectedProductColor
+                                    single === selectedProductColor
                                     ? "checked"
                                     : ""
                                 }
@@ -375,7 +375,7 @@ function ProductModal(props) {
                                 value={single}
                                 checked={
                                   productVariant.sizes.length === 1 ||
-                                  single === selectedProductSize
+                                    single === selectedProductSize
                                     ? "checked"
                                     : ""
                                 }
@@ -411,7 +411,7 @@ function ProductModal(props) {
                                 value={single}
                                 checked={
                                   productVariant.materials.length === 1 ||
-                                  single === selectedProductMaterial
+                                    single === selectedProductMaterial
                                     ? "checked"
                                     : ""
                                 }

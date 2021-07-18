@@ -96,8 +96,8 @@
         img {
           display: block;
           margin: 0 auto;
-          max-height: 500px;
-          max-width: 600px;
+          max-height: 700px;
+          max-width: 700px;
         }
 
         .btn-close {
@@ -135,6 +135,21 @@
               transform: rotate(180deg);
             }
             opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .modal-landing {
+    .modal-content {
+      .modal-body {
+        .container-image {
+          img {
+            max-height: 500px !important;
+            max-width: 500px !important;
           }
         }
       }
@@ -207,7 +222,8 @@
       .modal-body {
         .container-image {
           img {
-            max-width: 300px !important;
+            max-width: 320px !important;
+            // min-height: 60vh;
           }
         }
       }
