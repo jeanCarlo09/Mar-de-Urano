@@ -79,7 +79,7 @@ const cartReducer = (state = initState, action) => {
         //   ];
       } else {
 
-        if (cartItem.quantity >= 5) {
+        if (cartItem.quantity >= 6) {
           return state;
         }
 

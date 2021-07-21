@@ -7,7 +7,7 @@ import BlogPostList from './blog/BlogPostList';
 const BlogApp = ({ categories }) => {
     return (
         <ShopLayout headerTop="visible">
-            <div className="shop-area pt-80 pb-100">
+            <div className="shop-area pt-95 pb-100">
                 <div className="container-fluid">
                     <div className="row">
                         <BlogSideBar categories={categories} />

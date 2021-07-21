@@ -92,7 +92,8 @@ const ProductDescriptionInfo = ({
 
   const [productCartQty, setProductCartQty] = useState(0);
 
-  const maxQuantity = useRef((product.availableForSale) ? 5 : 0);
+  const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
+  product.maxQuantity = maxQuantity.current;
 
   const availableForSale = get(product, "availableForSale");
   const shortDescription = get(product, "descriptionHtml")

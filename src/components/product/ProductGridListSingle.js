@@ -40,7 +40,7 @@ const ProductGridListSingle = ({
 
   const availableForSale = get(product, "availableForSale");
 
-  const shortDescription = get(product, "description");
+  // const shortDescription = get(product, "description");
 
   const discount = false;
   const newProduct = moment(product.publishedAt).isAfter(
@@ -75,7 +75,7 @@ const ProductGridListSingle = ({
             )}
 
             <div className="product-action">
-              <div className="pro-same-action pro-cart">
+              <div className={`pro-same-action ${(product.productType != 'Custom') ? 'pro-cart' : 'pro-cart-custom'}`}>
                 {availableForSale ? (
                   <Link to={url}>Select Option</Link>
                 ) : product.stock && product.stock > 0 ? (
@@ -103,11 +103,16 @@ const ProductGridListSingle = ({
                   </button>
                 )}
               </div>
-              <div className="pro-same-action pro-quickview">
-                <button onClick={() => setModalShow(true)} title="Quick View">
-                  <i className="pe-7s-look" />
-                </button>
-              </div>
+
+              {
+                (product.productType != 'Custom') &&
+                <div className="pro-same-action pro-quickview">
+                  <button onClick={() => setModalShow(true)} title="Quick View">
+                    <i className="pe-7s-look" />
+                  </button>
+                </div>
+              }
+
             </div>
           </div>
           <div className="product-content text-center">

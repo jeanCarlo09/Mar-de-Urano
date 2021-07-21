@@ -19,7 +19,7 @@
 
     &-title {
       position: absolute;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: $bg-collection-name;
       left: 0;
       bottom: 0;
       width: 100%;
@@ -28,7 +28,7 @@
       h4 {
         color: $white;
         font-size: 1rem;
-        // font-weight: 600;
+        margin: 0;
       }
 
       &:hover {

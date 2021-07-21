@@ -16,19 +16,19 @@
       span {
         display: inline-block;
         line-height: 1;
-        color: #fff;
+        color: $white;
         font-size: 13px;
         font-weight: 500;
         padding: 2px 10px 5px;
         margin-right: 10px;
         &.pink {
-          background-color: #fa6bff;
+          background-color: $theme-pink;
         }
         &.purple {
           background-color: $theme-color;
         }
         &.red {
-          background-color: #c61a32;
+          background-color: $theme-red;
         }
 
         &::last-child {
@@ -45,7 +45,7 @@
     text-align: center;
     .blog-content {
       display: inline-block;
-      background-color: #fff;
+      background-color: $white;
       padding: 14px 44px;
       margin: -64px 0 0;
       z-index: 99;
@@ -72,14 +72,12 @@
           font-size: 18px;
           line-height: 27px;
         }
-        a {
-        }
       }
       span {
-        color: #666;
+        color: $theme-gray;
         font-style: italic;
         a {
-          color: #666;
+          color: $theme-gray;
           &:hover {
             color: $theme-color;
           }
@@ -87,7 +85,7 @@
       }
 
       &--style2 {
-        background: #f6f3f3;
+        background: $theme-white;
         width: 100%;
         min-height: 150px;
         padding: 21px 15px 30px 15px;
@@ -100,8 +98,8 @@
 /* blog page */
 
 .blog-wrap-2 {
-  box-shadow: 0 4px 10px rgba(85, 85, 85, 0.2);
-  // border-radius: 10px;
+  box-shadow: 0 4px 10px $blog-gray-shadow;
+
   overflow: hidden;
   .blog-img-2 {
     overflow: hidden;
@@ -110,10 +108,8 @@
     img {
       width: 100%;
       max-height: 60vh;
-      // transform: scale(1);
       transition: all 0.5s ease 0s;
       object-fit: cover;
-
       opacity: 1;
 
       &:hover {
@@ -130,9 +126,9 @@
       top: 50%;
       transform: translateY(-50%);
       a {
-        background-color: #ff0000;
+        background-color: $bg-red;
         border-radius: 50px;
-        color: #fff;
+        color: $white;
         display: inline-block;
         font-size: 25px;
         height: 60px;
@@ -159,7 +155,7 @@
       display: flex;
       ul {
         li {
-          color: #333;
+          color: $meta-dark-gray;
           display: inline-block;
           font-size: 14px;
           letter-spacing: 1px;
@@ -170,7 +166,7 @@
           display: inline-block;
           line-height: 1;
           &::before {
-            background-color: #555;
+            background-color: $meta-gray;
             content: "";
             height: 2px;
             position: absolute;
@@ -183,7 +179,7 @@
             display: none;
           }
           a {
-            color: #555;
+            color: $meta-gray;
             &:hover {
               color: $theme-color;
             }
@@ -195,7 +191,7 @@
       font-size: 22px;
       font-weight: 500;
       margin: 10px 0 20px;
-      color: #333;
+      color: $meta-dark-gray;
       @media #{$lg-layout} {
         font-size: 19px;
       }
@@ -207,7 +203,7 @@
         margin: 10px 0 12px;
       }
       a {
-        color: #333;
+        color: $meta-dark-gray;
         &:hover {
           color: $theme-color;
         }
@@ -229,7 +225,7 @@
         height: 1px;
         width: 100%;
         z-index: 9;
-        background-color: rgb(122, 122, 122);
+        background-color: $bg-dark-gray;
       }
 
       .entry-title {
@@ -250,15 +246,12 @@
         overflow: hidden;
       }
       &-readmore {
-        background: linear-gradient($theme-color, #fcd309c9);
+        background: linear-gradient($theme-color, $theme-color-light);
         padding: 10px 30px;
         border-radius: 50px;
         color: $white;
-        // box-shadow: 2px 2px 6px 4px #f9cf0075;
-
         &:hover {
           opacity: 0.8;
-          // box-shadow: 2px 2px 6px #f9cf008e;
         }
       }
     }
@@ -323,9 +316,7 @@
 
       & > .item {
         a {
-          // position: relative;
           &::before {
-            // background-color: red;
             background: none 0px 0px repeat scroll rgb(249, 207, 0);
             border-radius: 50%;
             display: block;
@@ -355,7 +346,7 @@
 .nav-style-4.owl-carousel {
   .owl-nav {
     div {
-      color: #fff;
+      color: $white;
       display: inline-block;
       font-size: 20px;
       left: 0px;
@@ -377,8 +368,8 @@
         font-size: 30px;
       }
       &:hover {
-        color: #fff;
-        background-color: #333;
+        color: $white;
+        background-color: $meta-dark-gray;
       }
       &.owl-next {
         left: auto;

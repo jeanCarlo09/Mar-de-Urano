@@ -11,7 +11,7 @@ export const BlogSideBarCategories = ({ categories, categoriesActives }) => {
                         <li key={category.id}>
                             <div className="sidebar-widget-list-left blog-categories-item">
                                 <CheckCategorie category={category}
-                                    isChecked={categoriesActives.includes(category.handle)}>
+                                    isChecked={(categoriesActives) ? categoriesActives.includes(category.handle) : false}>
 
                                 </CheckCategorie>
                                 <span className="checkmark" />

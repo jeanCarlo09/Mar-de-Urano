@@ -18,7 +18,7 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
     const [data, setData] = useState([...posts]);
 
     useEffect(() => {
-        setData(postsWithCategoriesActives(posts, categoriesActives));
+        categoriesActives && setData(postsWithCategoriesActives(posts, categoriesActives));
     }, [categoriesActives]);
 
 

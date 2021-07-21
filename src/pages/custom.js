@@ -15,9 +15,20 @@ import { fetchProducts } from '../redux/actions/productActions';
 
 const Custom = ({ data, location }) => {
 
-  const custom = location.search.substring(1, location.search.length);
+
   const nodes = get(data, "allShopifyProduct.nodes");
   let products = getProductsWithCustom(nodes);
+
+  if (location.search !== "") {
+    const custom = location.search.substring(1, location.search.length).split('-');
+    console.log(custom, 'custom');
+    products = products.filter((product) =>
+      product.tags.some((tag) => tag === custom[1])
+    );
+    console.log(products, 'products', custom);
+  }
+
+  // console.log(products[0].tags);
 
   // const prints = get(data, 'allContentfulPrintCustom.nodes');
 

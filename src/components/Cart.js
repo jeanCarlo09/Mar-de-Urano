@@ -206,11 +206,12 @@ const Cart = props => {
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                        cartItemStock(
-                                          cartItem,
-                                          cartItem.selectedProductColor,
-                                          cartItem.selectedProductSize
-                                        )
+                                        cartItem.maxQuantity
+                                        // cartItemStock(
+                                        //   cartItem,
+                                        //   cartItem.selectedProductColor,
+                                        //   cartItem.selectedProductSize
+                                        // )
                                       }
                                     >
                                       +
