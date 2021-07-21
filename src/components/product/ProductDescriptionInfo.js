@@ -91,7 +91,6 @@ const ProductDescriptionInfo = ({
 
 
   const [productCartQty, setProductCartQty] = useState(0);
-
   const maxQuantity = useRef((product.availableForSale) ? 6 : 0);
   product.maxQuantity = maxQuantity.current;
 
@@ -244,7 +243,7 @@ const ProductDescriptionInfo = ({
     setProductCartQty(getProductQuantity(cartItems, product, selectedProductColor,
       selectedProductSize, selectedProductMaterial, selectedProductPrint));
     setQuantityCount(1);
-  }, [cartItems])
+  }, [cartItems]);
 
   useEffect(() => {
     if (firstLoad && productVariant !== null) {
@@ -514,7 +513,7 @@ const ProductDescriptionInfo = ({
                 updateAddCart();
 
               }}
-              disabled={(productCartQty >= maxQuantity.current
+              disabled={(!product.availableForSale || productCartQty >= maxQuantity.current
                 || product.productType === 'Custom' && (selectedProductColor === null || selectedProductPrint === null)
               )}
             >
