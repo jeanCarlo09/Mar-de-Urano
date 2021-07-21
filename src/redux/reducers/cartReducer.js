@@ -68,7 +68,6 @@ const cartReducer = (state = initState, action) => {
         //     cartItem.selectedProductSize !== product.selectedProductSize ||
         //     cartItem.selectedProductMaterial !== product.selectedProductMaterial)
         // ) {
-        //   console.log("cartItem !== undefined", cartItem);
         //   return [
         //     ...cartItems,
         //     {

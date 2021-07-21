@@ -16,7 +16,6 @@ export const CheckCategorie = ({ category, isChecked }) => {
         setCheckedState(!checkedState);
 
         if (window.location.search != '') {
-            console.log('ROUTING');
             navigate('/blog');
         }
     }

@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from "prop-types";
+
 import ProductgridList from '../../components/product/ProductgridList';
 
 export const RelatedProducts = ({ relatedProducts }) => {
@@ -18,4 +20,9 @@ export const RelatedProducts = ({ relatedProducts }) => {
 
         </section>
     );
+}
+
+
+RelatedProducts.propTypes = {
+    relatedProducts: PropTypes.array
 }

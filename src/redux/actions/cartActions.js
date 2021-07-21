@@ -66,7 +66,6 @@ export const decreaseQuantity = (item, addToast) => {
 
 //decrease from cart
 export const increaseQuantity = (item, addToast) => {
-  console.log('increase');
   return dispatch => {
     if (addToast) {
       addToast("Item Incremented From Cart", {

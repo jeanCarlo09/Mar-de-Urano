@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const ProductCollectionImages = ({ product }) => {
-    console.log('product', product);
+
     return (
         product.images.slice(0, 2).map((img, index) => (
 

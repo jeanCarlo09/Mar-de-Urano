@@ -21,7 +21,6 @@ import {
 import ShopLayout from "./layouts/ShopLayout";
 
 const Cart = props => {
-  //   console.log(props);
 
   let {
     cartItems,
@@ -42,8 +41,6 @@ const Cart = props => {
     e.preventDefault();
     handleCheckout(cartItems);
   };
-
-  console.log('IMP', cartItems);
 
   return (
     <Fragment>

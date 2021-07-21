@@ -1,11 +1,10 @@
 import React from "react";
 import Swiper from "react-id-swiper";
+import PropTypes from "prop-types";
+
 import SliderCollectionSingle from "../../components/slider/SliderCollectionSingle";
-// import HeroSliderTenSingle from "../../components/hero-slider/HeroSliderTenSingle.js";
 
 const SliderCollection = ({ sliderCollection }) => {
-
-    console.log('sliderCollection', sliderCollection);
 
     const params = {
         effect: "fade",
@@ -38,11 +37,6 @@ const SliderCollection = ({ sliderCollection }) => {
                     {sliderCollection &&
                         sliderCollection.map((single, key) => {
                             return (
-                                // <HeroSliderTenSingle
-                                //     data={single}
-                                //     key={key}
-                                //     sliderClass="swiper-slide"
-                                // />
                                 <SliderCollectionSingle key={key} data={single} sliderClass="swiper-slide" />
                             );
                         })}
@@ -51,5 +45,10 @@ const SliderCollection = ({ sliderCollection }) => {
         </div>
     );
 };
+
+
+SliderCollection.propTypes = {
+    sliderCollection: PropTypes.array
+}
 
 export default SliderCollection;

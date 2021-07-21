@@ -3,8 +3,6 @@ import parse from "html-react-parser";
 
 export const IdeologyCards = ({ card }) => {
 
-    console.log(card.description.childMarkdownRemark.html);
-
     return (
         <div className="col-md-6  col-sm-12 ideology-cards-item">
             <article className="ideology-cards-item-content">
