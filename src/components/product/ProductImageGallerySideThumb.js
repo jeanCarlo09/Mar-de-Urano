@@ -71,8 +71,6 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition, images, imageCus
     moment().subtract("7", "days")
   );
 
-  console.log('product', product);
-
   return (
     <Fragment>
       <div className="row row-5">

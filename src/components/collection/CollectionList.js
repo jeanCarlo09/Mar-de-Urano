@@ -9,7 +9,7 @@ const CollectionList = ({ collections }) => {
         <div className="shop-area pt-95 pb-100">
             <div className="container-fluid">
                 <div className="row">
-                    <div className="grid-mosaic col-12 mt-35">
+                    <div className="grid-mosaic col-12">
 
                         {collections.map(collection => (
 

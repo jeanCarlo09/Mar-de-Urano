@@ -61,8 +61,6 @@ const ProductImageDescription = ({
 
   const [imageCustomActive, setImageCustomActive] = useState((product.productType === 'Custom' ? imagesArray[0] : null));
 
-  console.log(imageCustomActive, 'image', images);
-
   const checkDescription = () => {
     if (!description) {
       setDescription(true);
@@ -75,8 +73,6 @@ const ProductImageDescription = ({
     }
 
   }
-
-  console.log(cartItems);
 
   return (
     <div

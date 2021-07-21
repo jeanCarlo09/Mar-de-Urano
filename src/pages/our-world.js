@@ -5,14 +5,19 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { save, load } from "redux-localstorage-simple";
 import { composeWithDevTools } from "redux-devtools-extension";
-
 import rootReducer from "../redux/reducers/rootReducer";
+import get from "lodash/get";
 
 import MarDeUranoApp from "../components/MarDeUranoApp";
 import ShopLayout from "../components/layouts/ShopLayout";
+import { graphql } from "gatsby";
+import { IdeologyCards } from "../components/our-world/ideologyCards";
 
-const OurWorld = ({ data, location }) => {
+const OurWorld = ({ data }) => {
+
   let store;
+
+  const ideologyCards = get(data, 'allContentfulIdeologyCards.nodes');
 
   if (typeof window !== `undefined`) {
     store = createStore(
@@ -27,13 +32,14 @@ const OurWorld = ({ data, location }) => {
     );
   }
 
+
   return (
     <Provider store={store}>
       <MarDeUranoApp>
         <ShopLayout headerTop="visible">
           <div className="shop-area pt-95 pb-100">
             <div className="container-fluid our-world">
-              <div className="row mt-35 about-us">
+              <div className="row about-us">
                 <div className="col-10 order-2 order-lg-1 col-lg-5 about-us-img">
                   <img
                     className="img-fluid"
@@ -137,69 +143,12 @@ const OurWorld = ({ data, location }) => {
               </div>
               <div className="mt-5 ideology-cards">
                 <div className="row">
-                  <div className="col-md-6  col-sm-12 ideology-cards-item">
-                    <article className="ideology-cards-item-content">
-                      <div className="ideology-cards-item-content-title">
-                        <h2>ART</h2>
-                      </div>
-                      <div className="ideology-cards-item-content-description">
-                        <p>
-                          Every single one of our prints comes from an oil painting
-                          from Ramiro's studio called Estudio Libre Expresion.
-                        </p>
-                      </div>
-                    </article>
-                  </div>
 
-                  <div className="col-md-6  col-sm-12 ideology-cards-item">
-                    <article className="ideology-cards-item-content">
-                      <div className="ideology-cards-item-content-title">
-                        <h2>TEXTILES</h2>
-                      </div>
-                      <div className="ideology-cards-item-content-description">
-                        <p>
-                          Every textile we use is carefully selected to ensure
-                          sustainability and high quality. We use either recycled,
-                          regenerated, organic or natural fibers. Some of the brands
-                          we use are: ECONYL®, REPREVE®.
-                        </p>
-                      </div>
-                    </article>
-                  </div>
-
-                  <div className="col-md-6  col-sm-12 ideology-cards-item">
-                    <article className="ideology-cards-item-content">
-                      <div className="ideology-cards-item-content-title">
-                        <h2>ZERO WASTE</h2>
-                      </div>
-                      <div className="ideology-cards-item-content-description">
-                        <p>
-                          Our batches of production are small to avoid excessive
-                          waste. We save all of our fabric trims and give them a new
-                          life. We do fabric scrunchies, new bikinis or meditation
-                          cushions. That way 0% of our fabric is wasted.
-                        </p>
-                      </div>
-                    </article>
-                  </div>
-
-                  <div className="col-md-6  col-sm-12 ideology-cards-item">
-                    <article className="ideology-cards-item-content">
-                      <div className="ideology-cards-item-content-title">
-                        <h2>PRODUCTION</h2>
-                      </div>
-                      <div className="ideology-cards-item-content-description">
-                        <p>
-                          All of our pieces are designed, cut, and sewn in Costa Rica.
-                          Everything is handmade. We work with men and women operated
-                          manufacturers who respect fair wage practices. We outsource
-                          to local families that have the possibility of sewing from
-                          their own home. We base our supply chain in a shared economy
-                          so that there is space for everybody to grow.
-                        </p>
-                      </div>
-                    </article>
-                  </div>
+                  {
+                    ideologyCards.map((card, key) => (
+                      <IdeologyCards key={key} card={card}></IdeologyCards>
+                    ))
+                  }
 
                 </div>
               </div>
@@ -211,5 +160,21 @@ const OurWorld = ({ data, location }) => {
     </Provider>
   );
 };
+
+
+export const query = graphql`
+  query ourWorld {
+    allContentfulIdeologyCards(sort: { fields: order }) {
+      nodes {
+        title
+        description {
+          childMarkdownRemark {
+            html
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default OurWorld;

@@ -36,7 +36,7 @@ const CollectionDescriptionSticky = ({
     <>
       <div className="shop-area pt-95">
         <div className="container-fluid">
-          <div className="row mt-35">
+          <div className="row">
             <div className="col-lg-6 col-md-6">
               <CollectionImageGallerySticky collection={collection} />
             </div>

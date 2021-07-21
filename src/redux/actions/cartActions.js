@@ -100,7 +100,7 @@ export const deleteAllFromCart = addToast => {
   };
 };
 
-// get stock of cart item //No tiene sentido tener una función que no modifique el state en las acciones.
+// get stock of cart item
 export const cartItemStock = (item, color, size) => {
   if (item.stock) {
     return item.stock;

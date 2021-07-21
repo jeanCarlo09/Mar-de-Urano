@@ -7,17 +7,16 @@ const initialState = {
     categoriesActives: []
 };
 
-const blogReducer = (state = [], action) => {
+const blogReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case types.fetchBlogSuccess:
-
             return {
                 ...state,
                 posts: action.payload,
                 single: false,
                 postActive: {},
-                // categoriesActives: []
+                // categoriesActives: [state.categoriesActives]
             }
 
         case types.postSingleInfo:
@@ -25,7 +24,7 @@ const blogReducer = (state = [], action) => {
                 ...state,
                 postActive: state.posts.filter((post) => (post.handle === action.payload))[0],
                 single: true,
-                // categoriesActives: []
+                // categoriesActives: [state.categoriesActives]
             }
 
         case types.addActiveCategory:

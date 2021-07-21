@@ -13,7 +13,7 @@ const ProductTabLeft = ({ productActive, print }) => {
   return (
     <ShopLayout headerTop="visible">
       <ProductImageDescription
-        spaceTopClass="pt-100"
+        spaceTopClass="pt-95"
         spaceBottomClass="pb-100"
         productActive={productActive}
         galleryType="leftThumb"

@@ -12,6 +12,7 @@ import { postsWithCategoriesActives } from '../../helpers/blog';
 const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
 
 
+    console.log(posts, 'posts ssss');
     const [offset, setOffset] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
@@ -28,41 +29,42 @@ const BlogPostList = ({ posts, single, postActive, categoriesActives }) => {
         setCurrentData(data.slice(offset, offset + pageLimit));
     }, [offset, data]);
 
+    console.log(currentData);
 
     return (
         <div className="col-xl-8 col-lg-7 order-1 order-lg-2">
-            <div className="col-12">
-                <article className="post">
-                    {
-                        (single)
-                            ?
-                            <BlogPost post={postActive}></BlogPost>
-                            :
-                            <>
 
-                                {
-                                    currentData.map(post => (
-                                        <BlogPostCard key={post.id} post={post} />
-                                    ))
-                                }
+            <div className="post">
+                {
+                    (single)
+                        ?
+                        <BlogPost post={postActive}></BlogPost>
+                        :
+                        <>
 
-                                <div className="pro-pagination-style text-center mt-30">
-                                    <Paginator
-                                        totalRecords={data.length}
-                                        pageLimit={pageLimit}
-                                        pageNeighbours={2}
-                                        setOffset={setOffset}
-                                        currentPage={currentPage}
-                                        setCurrentPage={setCurrentPage}
-                                        pageContainerClass="mb-0 mt-0"
-                                        pagePrevText="«"
-                                        pageNextText="»"
-                                    />
-                                </div>
-                            </>
-                    }
-                </article>
+                            {
+                                currentData.map(post => (
+                                    <BlogPostCard key={post.id} post={post} />
+                                ))
+                            }
+
+                            <div className="pro-pagination-style text-center mt-30">
+                                <Paginator
+                                    totalRecords={data.length}
+                                    pageLimit={pageLimit}
+                                    pageNeighbours={2}
+                                    setOffset={setOffset}
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    pageContainerClass="mb-0 mt-0"
+                                    pagePrevText="«"
+                                    pageNextText="»"
+                                />
+                            </div>
+                        </>
+                }
             </div>
+
         </div>
     );
 }

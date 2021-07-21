@@ -5,7 +5,7 @@ import { Link } from 'gatsby';
 export const BlogPostCard = ({ post }) => {
 
     return (
-        <div className="blog-wrap-2 mb-40 ">
+        <article className="blog-wrap-2 mb-40 ">
 
             <div className="post-thumbnail blog-img-2">
                 <img src={post.image.fixed.src} className="post-image" alt={post.title} loading="lazy" />
@@ -36,7 +36,7 @@ export const BlogPostCard = ({ post }) => {
                     <Link className="entry-content-readmore" to={`/blog?${post.handle}`} >Read More</Link>
                 </div>
             </div>
-        </div>
+        </article>
     );
 
 }

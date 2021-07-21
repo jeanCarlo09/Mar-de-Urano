@@ -259,6 +259,7 @@
 }
 
 .blog-sidebar {
+  // margin: 0px 15px;
   &-single {
     display: flex;
     align-items: center;
@@ -298,7 +299,7 @@
       content: "";
       display: block;
       width: 15%;
-      margin-left: 1%;
+      // margin-left: 1%;
       height: 3px;
       border-radius: 10px;
       background-color: $theme-color;
